@@ -6,31 +6,9 @@ using namespace std;
 #define bitcnt __builtin_popcount
 ll MOD = 1e9 + 7;
 ll BASE = 31;
-vi powers;
 
-int logn(double n, int base) {
-    n--;
-    int res = 0;
-    if (n < 0) {
-        return -1;
-    }
-    while (n) {
-        n /= base;
-        res++;
-    }
-    return res;
-}
-
-ll modpow(ll a, ll b) {
-    if (b < 0) return 0;
-    ll res = 1;
-    while (b) {
-        if (b&1) res = (res*a) % MOD;
-        a = a * a % MOD;
-        b >>= 1;
-    }
-    return res;
-}
+string s, t;
+vi powers, sHash, tHash;
 
 void strHash(vi& res, string& s) {
     res = vi(s.size(), s[0] - 'a');
@@ -45,4 +23,27 @@ ll substrHash(vi& strHash, int left, int right) {
     }
     ll res = (strHash[right] - ((strHash[left - 1] * powers[right - left + 1]) % MOD) + MOD) % MOD;
     return res;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    cin >> s >> t;
+    powers = vi(s.size(), 1);
+    for (int i = 1; i < s.size(); i++) {
+        powers[i] = (powers[i - 1] * BASE) % MOD;
+    }
+    strHash(sHash, s);
+    strHash(tHash, t);
+    
+    for (int i = 0; i <= s.size() - t.size(); i++) {
+        ll sub = substrHash(sHash, i, i + t.size() - 1);
+        if (sub == tHash.back()) {
+            cout << i << endl;
+            return 0;
+        }
+    }
+    cout << -1 << endl;
+    return 0;
 }

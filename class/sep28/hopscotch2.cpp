@@ -36,7 +36,6 @@ int main() {
         }
 
         // choose jump
-        // cout << i << ": " << minDq.front().second << "(" << minDq.front().first << " + " << dp[i].first << ")" << endl;
         dp[i] = {minDq.front().first + dp[i].first, minDq.front().second};
 
         // push cur stone
