@@ -1,4 +1,5 @@
 # To add to cp notes:
+READ QUESTIONS CAREFULLY, (e.g. inversion definition blood test dmopc16c1p5)
 - bin search
     - "subset" -> bin search on indexes of array (see vmss7wc15c2p2)
 - string hashing
@@ -19,7 +20,9 @@
     - if wish to traverse entire tree given root, dist = (2 * nodecnt) - depth
 - factorial arithmitic
     - to count factors of n!, div n by k^1, k^2, ..., k^wtv till n/k^wtv is zero
-- how to model graph questions -> shortest path surprisingly common (e.g. cf 2024 D)
+- how to model graph questions 
+    -> shortest path surprisingly common (e.g. cf 2024 D)
+    -> how to combine distances in equation to abstractify -> dist(a, b) + dist(b, c) = dist(a, c) (e.g. dmopc21c9p3)
 - minimum spanning tree w/ dsu -> trees are easy to traverse, + other things
 - xor trie -> specifically to get min/max with query, go the SAME/OPPOSITE WAY
     - if min and mask & queryInt = 0, go 0
@@ -27,9 +30,28 @@
 - add template for segtree & fenwick tree
 - get last bit by -x & x -> -x = !x + 1 
     - therefore for all neg & pos pairs, every bit after first 1 is same and every bit before is flipped therefore will never be 1 after &
+- bit is just prefix sum, prefix sum has a lot of uses
+    - num inversions
+    - freq sum (how many elements bigger/smaller)
+- how to model subarray/BIT questions
+    - given a, find num of subarrays where median >= x (2 median tricks: convert to psa, binary search)
+        -> e.g. cf 1486 D -> bin search on median = x, then see if any subarray exsists which has the median
+    - given a, find num subarrays where mean >= x
+online query: answer last question before take a new one 
+offline query: take all questions in and process all of them and give back all ans
 
+    
 # To add as an exemplar
 - coci06c5p6
 - ccc16s3
 - cf 2024 D
 - xorm
+
+
+There are N flowers arranged in a row. For each i (1 <= i <= N), the height and the beauty of the 
+i-th flower from the left is hi and ai, respectively. Here, h1, h2, ..., hN are all distinct.
+
+Taro is pulling out some flowers so that the following condition is met:
+
+The heights of the remaining flowers are monotonically increasing from left to right.
+Find the maximum possible sum of the beauties of the remaining flowers.
