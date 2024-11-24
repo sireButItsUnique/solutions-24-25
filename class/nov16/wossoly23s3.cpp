@@ -11,9 +11,11 @@ using namespace std;
 ll MOD = 1e9 + 7;
 ll BASE = 31;
 
+ll n, Q; 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
     return 0;
 }
+//xiaomingnan@gmail.com

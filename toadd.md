@@ -1,11 +1,4 @@
 # To add to cp notes:
-READ QUESTIONS CAREFULLY, (e.g. inversion definition blood test dmopc16c1p5)
-- bin search
-    - "subset" -> bin search on indexes of array (see vmss7wc15c2p2)
-- string hashing
-    - palindromes
-    - string search
-    - double hashing
 - lexicgraphical high (letter by letter)
 - gnu hash table
 - ENDL IS SLOW ASF USE \n
@@ -37,21 +30,35 @@ READ QUESTIONS CAREFULLY, (e.g. inversion definition blood test dmopc16c1p5)
     - given a, find num of subarrays where median >= x (2 median tricks: convert to psa, binary search)
         -> e.g. cf 1486 D -> bin search on median = x, then see if any subarray exsists which has the median
     - given a, find num subarrays where mean >= x
+    - can shift BIT if triangle
 online query: answer last question before take a new one 
 offline query: take all questions in and process all of them and give back all ans
-
+- for hashing, DONT USE UNSIGNED, LET IT GO NEG AND THEN ADD MODS (credit kevin lu, see ccc20s3)
     
 # To add as an exemplar
 - coci06c5p6
 - ccc16s3
 - cf 2024 D
 - xorm
+- ccc20s4
 
 
 There are N flowers arranged in a row. For each i (1 <= i <= N), the height and the beauty of the 
 i-th flower from the left is hi and ai, respectively. Here, h1, h2, ..., hN are all distinct.
-
 Taro is pulling out some flowers so that the following condition is met:
-
 The heights of the remaining flowers are monotonically increasing from left to right.
 Find the maximum possible sum of the beauties of the remaining flowers.
+
+Restraints:
+All values in input are integers.
+1 <= N <= 2e5
+1 <= hi <= N
+h1, h2, ..., hN are all distinct
+1 <= ai <= N
+
+Given input:
+The first line will contain the integer N.
+The next line will contain N integers, hi.
+The next line will contain N integers, ai.
+
+Write a c++ program to print the maximum possible sum of the beauties of the remaining flowers.

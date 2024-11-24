@@ -56,13 +56,7 @@ int main() {
         if (a[i] == 1) suf[i]--;
         else suf[i]++;
         addAtBIT(BIT, suf[i] + 1.5e5, 1);
-        
     }
-    // cout << "suf: ";
-    // for (int i = 0; i < n; i++) {
-    //     cout << suf[i] << " ";
-    // }
-    // cout << endl;
 
     // count res
     res += (sum > 0);

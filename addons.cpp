@@ -31,18 +31,3 @@ ll modpow(ll a, ll b) {
     }
     return res;
 }
-
-void strHash(vi& res, string& s) {
-    res = vi(s.size(), s[0] - 'a');
-    for (int i = 1; i < s.size(); i++) {
-        res[i] = (res[i - 1] * BASE + (s[i] - 'a')) % MOD;
-    }
-}
-
-ll substrHash(vi& strHash, int left, int right) {
-    if (!left) {
-        return strHash[right];
-    }
-    ll res = (strHash[right] - ((strHash[left - 1] * powers[right - left + 1]) % MOD) + MOD) % MOD;
-    return res;
-}

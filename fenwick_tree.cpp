@@ -13,23 +13,23 @@ ll BASE = 31;
 /*** 
 DO NOT USE IDX 0 INSIDE BIT TREES! ADD ONE IF NECESSARY 
 ***/
-ll MAX_ARR_LEN = 1e5 + 5;
-void addAtBIT(vl& BIT, int idx, ll diff) {
-    while (idx <= MAX_ARR_LEN) {
-        BIT[idx] += diff;
-        idx += (-idx & idx);
+void addAtBIT(vi& BIT, int idx, ll diff) {
+    for (int i = idx; i < BIT.size(); i += (i & -i)) {
+        BIT[i] += diff;
     }
 }
 
-ll getPrefixAtBIT(vl& BIT, int idx) {
+ll getPrefixAtBIT(vi& BIT, int idx) {
     ll res = 0;
-    while (idx > 0) {
-        res += BIT[idx];
-        idx -= (-idx & idx);
-    }
+    for (int i = idx; i > 0; i -= (i & -i)) {
+		res += BIT[i];
+	}
     return res;
 }
 
+/*** 
+CAN ONLY DO PREFIX -> NO GETTING SEGMENTS
+***/
 ll MAX_ARR_LEN = 1e5 + 5;
 void setAtBIT(vl& BIT, int idx, ll diff) {
     while (idx <= MAX_ARR_LEN) {
@@ -45,4 +45,29 @@ ll getMaxAtBIT(vl& BIT, int idx) {
         idx -= (-idx & idx);
     }
     return res;
+}
+
+/*** 
+2D -> DONT USE ROW OR COL 0
+***/
+void addAt2DBIT(vector<vi>& BIT, int row, int col, ll diff) {
+    for (int i = row; i < BIT.size(); i += (i & -i)) {
+        for (int j = col; j < BIT[0].size(); j += (j & -j)) {
+            BIT[i][j] += diff;
+        }
+    }
+}
+
+ll getPrefixAt2DBIT(vector<vi>& BIT, int row, int col) {
+    ll res = 0;
+    for (int i = row; i > 0; i -= (i & -i)) {
+		for(int j = col; j > 0; j -= (j &-j)) {
+			res += BIT[i][j];
+		}
+	}
+    return res;
+}
+
+ll getRectAt2DBIT(vector<vi>& BIT, int r1, int r2, int c1, int c2) {
+    return getPrefixAt2DBIT(BIT, r2, c2) - getPrefixAt2DBIT(BIT, r2, c1 - 1) - getPrefixAt2DBIT(BIT, r1 - 1, c2) + getPrefixAt2DBIT(BIT, r1 - 1, c1 - 1);
 }
