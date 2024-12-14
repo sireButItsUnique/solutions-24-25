@@ -29,6 +29,8 @@ offline query: take all questions in and process all of them and give back all a
     - how to get highest element smaller than wtv/smallest element bigger than wtv
     - how to get how many elements are bigger/smaller than wtv (https://chatgpt.com/c/675bba71-4c38-8006-b125-67088eb9ebe7)
 - limited dijkstra (e.g. ccc15s4, leetcode plane ticket thing, ccc23s4)
+- weird debugging (out of bounds but doesnt error??) e.g. for (int i = 0; i < n && filled + i < k; i++), must put i < n for some reason
+    - brute forced it -> sometimes look at constraints and literally try every value
 # To add as an exemplar
 - coci06c5p6
 - ccc16s3

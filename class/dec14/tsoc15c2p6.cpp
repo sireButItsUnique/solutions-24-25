@@ -8,17 +8,10 @@ using namespace std;
 #define vs vector<string>
 #define vb vector<bool>
 #define bitcnt __builtin_popcount
+void precise() {cout << fixed << setprecision(7);}
 ll MOD = 1e9 + 7;
 ll BASE = 31;
 
-/*** 
-MIN RANGE QUERY SEGTREE, MODIFY AS NEEDED
-ORIGINAL ARRAY (start, end, pos) INDEXES ARE 0 INDEXED
-idx * 2     = left child
-idx * 2 + 1 = right child
-idx / 2     = parent
-idx + s / 2 = use idx as leaf
-***/
 class Segtree {
 public:
     vector<ll> tree, lazy;
@@ -33,9 +26,9 @@ public:
         lazy.assign(2 * n, 0);
     }
 
-    void pushUpdate(ll idx, ll start, ll end) {
+    void push(ll idx, ll start, ll end) {
         if (lazy[idx] != 0) {
-            tree[idx] += lazy[idx]; // Apply the pending update: How does the range query change if lazy were to be applied to all leafs?
+            tree[idx] += lazy[idx]; // Apply the pending update
 
             if (start != end) { // Propagate to children
                 lazy[idx * 2] += lazy[idx];
@@ -48,13 +41,13 @@ public:
 
     // idx = node in seg tree, start = idx in org array, end = idx in org array
     void rangeUpdate(ll l, ll r, ll diff, ll idx, ll start, ll end) {
-        pushUpdate(idx, start, end);
+        push(idx, start, end);
 
         if (start > r || end < l) return; // No overlap, don't do anything
 
         if (start >= l && end <= r) { // Full overlap, update & stop here 
             lazy[idx] += diff;
-            pushUpdate(idx, start, end);
+            push(idx, start, end);
             return;
         }
 
@@ -63,14 +56,14 @@ public:
         rangeUpdate(l, r, diff, idx * 2, start, mid);
         rangeUpdate(l, r, diff, idx * 2 + 1, mid + 1, end);
 
-        tree[idx] = min(tree[idx * 2], tree[idx * 2 + 1]); // Update current node: What happens to res when you combine both intervals
+        tree[idx] = min(tree[idx * 2], tree[idx * 2 + 1]); // Update current node
     }
 
     // idx = node in seg tree, start = idx in org array, end = idx in org array
     ll rangeQuery(ll l, ll r, ll idx, ll start, ll end) {
-        pushUpdate(idx, start, end);
+        push(idx, start, end);
 
-        if (start > r || end < l) return LLONG_MAX; // No overlap: Return val which won't change res
+        if (start > r || end < l) return LLONG_MAX; // No overlap, return val which won't change res
 
         if (start >= l && end <= r) return tree[idx]; // Full overlap, return its val
 
@@ -78,7 +71,7 @@ public:
         ll leftRes = rangeQuery(l, r, idx * 2, start, mid);
         ll rightRes = rangeQuery(l, r, idx * 2 + 1, mid + 1, end);
 
-        return min(leftRes, rightRes); // Combine left and right: What happens to the res if you include both?
+        return min(leftRes, rightRes);
     }
 
     void rangeUpdate(ll l, ll r, ll diff) {
@@ -97,3 +90,22 @@ public:
         return rangeQuery(idx, idx);
     }
 };
+
+int n, q;
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cin >> n >> q;
+    Segtree tree(n + 1); 
+    for (int r, i = 1; i <= n; i++) {
+        cin >> r;
+        tree.rangeUpdate(i, i, r);
+    }
+    int a, b, c;
+    while (q--) {
+        cin >> a >> b >> c;
+        tree.rangeUpdate(a, b, -1 * c);
+        cout << max(0LL, tree.rangeQuery(a, b)) << " " << max(0LL, tree.rangeQuery(1, n)) << '\n';
+    }
+    return 0;
+}

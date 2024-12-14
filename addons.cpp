@@ -21,12 +21,12 @@ int logn(double n, int base) {
     return res;
 }
 
-ll modpow(ll a, ll b) {
+ll modpow(ll a, ll b, ll mod) {
     if (b < 0) return 0;
     ll res = 1;
     while (b) {
-        if (b&1) res = (res*a) % MOD;
-        a = a * a % MOD;
+        if (b&1) res = (res*a) % mod;
+        a = a * a % mod;
         b >>= 1;
     }
     return res;

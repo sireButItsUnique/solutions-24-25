@@ -8,17 +8,11 @@ using namespace std;
 #define vs vector<string>
 #define vb vector<bool>
 #define bitcnt __builtin_popcount
+void precise() {cout << fixed << setprecision(7);}
 ll MOD = 1e9 + 7;
 ll BASE = 31;
 
-/*** 
-MIN RANGE QUERY SEGTREE, MODIFY AS NEEDED
-ORIGINAL ARRAY (start, end, pos) INDEXES ARE 0 INDEXED
-idx * 2     = left child
-idx * 2 + 1 = right child
-idx / 2     = parent
-idx + s / 2 = use idx as leaf
-***/
+int m, n, q;
 class Segtree {
 public:
     vector<ll> tree, lazy;
@@ -35,14 +29,14 @@ public:
 
     void pushUpdate(ll idx, ll start, ll end) {
         if (lazy[idx] != 0) {
-            tree[idx] += lazy[idx]; // Apply the pending update: How does the range query change if lazy were to be applied to all leafs?
+            tree[idx] += lazy[idx] * (end - start + 1); // Apply the pending update
 
             if (start != end) { // Propagate to children
                 lazy[idx * 2] += lazy[idx];
                 lazy[idx * 2 + 1] += lazy[idx];
             }
 
-            lazy[idx] = 0; // Clear the lazy value
+            lazy[idx] = 0; // Clear lazy val
         }
     }
 
@@ -63,14 +57,14 @@ public:
         rangeUpdate(l, r, diff, idx * 2, start, mid);
         rangeUpdate(l, r, diff, idx * 2 + 1, mid + 1, end);
 
-        tree[idx] = min(tree[idx * 2], tree[idx * 2 + 1]); // Update current node: What happens to res when you combine both intervals
+        tree[idx] = tree[idx * 2] + tree[idx * 2 + 1]; // Update current node
     }
 
     // idx = node in seg tree, start = idx in org array, end = idx in org array
     ll rangeQuery(ll l, ll r, ll idx, ll start, ll end) {
         pushUpdate(idx, start, end);
 
-        if (start > r || end < l) return LLONG_MAX; // No overlap: Return val which won't change res
+        if (start > r || end < l) return 0; // No overlap, return val which won't change res
 
         if (start >= l && end <= r) return tree[idx]; // Full overlap, return its val
 
@@ -78,7 +72,7 @@ public:
         ll leftRes = rangeQuery(l, r, idx * 2, start, mid);
         ll rightRes = rangeQuery(l, r, idx * 2 + 1, mid + 1, end);
 
-        return min(leftRes, rightRes); // Combine left and right: What happens to the res if you include both?
+        return (leftRes + rightRes);
     }
 
     void rangeUpdate(ll l, ll r, ll diff) {
@@ -92,8 +86,27 @@ public:
     void update(ll idx, ll diff) {
         rangeUpdate(idx, idx, diff);
     }
-
-    ll query(ll idx) {
-        return rangeQuery(idx, idx);
-    }
 };
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cin >> m >> n >> q;
+    Segtree tree(n + 5);
+    for (int a, i = 1; i <= n; i++) {
+        cin >> a;
+        tree.update(i, a);
+    }
+
+    int op, l, r, x;
+    while (q--) {
+        cin >> op >> l >> r;
+        if (op == 1) {
+            cin >> x;
+            tree.rangeUpdate(l, r, x);
+        } else {
+            cout << (tree.rangeQuery(l, r) % m) << '\n';
+        }
+    }
+    return 0;
+}
