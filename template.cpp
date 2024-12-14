@@ -8,12 +8,15 @@ using namespace std;
 #define vs vector<string>
 #define vb vector<bool>
 #define bitcnt __builtin_popcount
+void precise() {cout << fixed << setprecision(7);}
 ll MOD = 1e9 + 7;
 ll BASE = 31;
+
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    
 
     return 0;
 }

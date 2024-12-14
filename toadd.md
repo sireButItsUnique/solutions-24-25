@@ -1,26 +1,13 @@
 # To add to cp notes:
 - lexicgraphical high (letter by letter)
-- gnu hash table
-- ENDL IS SLOW ASF USE \n
 - trie
     - implementation (build w/ for loop)
-- tree diameter
-    - start at any node & find
-- tree traversal
-    - by definition there is only one way to go from a to b in a tree -> dist very easy just dfs
-    - to traverse entire tree & return is 2 * node cnt
-    - if wish to traverse entire tree from any node, dist = (2 * nodecnt) - diameter
-    - if wish to traverse entire tree given root, dist = (2 * nodecnt) - depth
-- factorial arithmitic
-    - to count factors of n!, div n by k^1, k^2, ..., k^wtv till n/k^wtv is zero
 - how to model graph questions 
     -> shortest path surprisingly common (e.g. cf 2024 D)
     -> how to combine distances in equation to abstractify -> dist(a, b) + dist(b, c) = dist(a, c) (e.g. dmopc21c9p3)
-- minimum spanning tree w/ dsu -> trees are easy to traverse, + other things
 - xor trie -> specifically to get min/max with query, go the SAME/OPPOSITE WAY
     - if min and mask & queryInt = 0, go 0
     - if min and mask & queryInt = 1, go 1
-- add template for segtree & fenwick tree
 - get last bit by -x & x -> -x = !x + 1 
     - therefore for all neg & pos pairs, every bit after first 1 is same and every bit before is flipped therefore will never be 1 after &
 - bit is just prefix sum, prefix sum has a lot of uses
@@ -33,8 +20,15 @@
     - can shift BIT if triangle
 online query: answer last question before take a new one 
 offline query: take all questions in and process all of them and give back all ans
-- for hashing, DONT USE UNSIGNED, LET IT GO NEG AND THEN ADD MODS (credit kevin lu, see ccc20s3)
-    
+- fracturing search -> each time a decision is made, more decisions/paths open up (usually greedy pq)
+    - e.g. ahscc1p5, cheerio1s2
+- gcd properties
+    - union of two sets = gcd <= gcd of both sets
+    - gcd <= min of set
+- "set.upper_bound is logn upper_bound(...) is n" -william ma in reference to ccc15s3
+    - how to get highest element smaller than wtv/smallest element bigger than wtv
+    - how to get how many elements are bigger/smaller than wtv (https://chatgpt.com/c/675bba71-4c38-8006-b125-67088eb9ebe7)
+- limited dijkstra (e.g. ccc15s4, leetcode plane ticket thing, ccc23s4)
 # To add as an exemplar
 - coci06c5p6
 - ccc16s3

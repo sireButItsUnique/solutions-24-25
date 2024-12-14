@@ -30,9 +30,8 @@ ll getPrefixAtBIT(vi& BIT, int idx) {
 /*** 
 CAN ONLY DO PREFIX -> NO GETTING SEGMENTS
 ***/
-ll MAX_ARR_LEN = 1e5 + 5;
 void setAtBIT(vl& BIT, int idx, ll diff) {
-    while (idx <= MAX_ARR_LEN) {
+    while (idx < BIT.size()) {
         BIT[idx] = max(BIT[idx], diff);
         idx += (-idx & idx);
     }
