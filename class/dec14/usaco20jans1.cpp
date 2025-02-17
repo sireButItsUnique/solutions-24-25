@@ -41,7 +41,7 @@ int main() {
         }
 
         // fill the rest with whats remaining
-        if (filled < k / 2) continue;
+        if (filled < k / 2) continue; // will be the same as a prev ans anyway
         vi tmp = a;
         for (int i = 0; i < n; i++) {
             tmp[i] %= berries;

@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define pii pair<int, int>  
+#define pll pair<ll, ll>
+#define vi vector<int>
+#define vl vector<ll>
+#define vs vector<string>
+#define vb vector<bool>
+#define bitcnt __builtin_popcount
+void precise() {cout << fixed << setprecision(7);}
+ll MOD = 1e9 + 7;
+ll BASE = 31;
+
+ll n, k, x, y;
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cin >> n >> k >> x >> y;
+    ll res = min(k, n) * x;
+    res += max(0LL, n - k) * y;
+    cout << res;
+    return 0;
+}
