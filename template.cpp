@@ -1,3 +1,4 @@
+#pragma GCC optimize("O3")
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -7,6 +8,7 @@ using namespace std;
 #define vl vector<ll>
 #define vs vector<string>
 #define vb vector<bool>
+#define vpii vector<pii>
 #define bitcnt __builtin_popcount
 void precise() {cout << fixed << setprecision(7);}
 ll MOD = 1e9 + 7;

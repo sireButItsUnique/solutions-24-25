@@ -57,6 +57,7 @@ offline query: take all questions in and process all of them and give back all a
     - keep the same numbers in each row & col
     - keep the same number of distinct row & cols
 - merge sort is O(n) if u alr have two sorted arrs
+- with ad hoc, manually find patterns with paper & WRITE IT OUT -> also have clear variable naming when implementing, write what each variable does since a lot of the time it gets abstracted -> THERES ALWAYS SOME STUPID PATTERN (usaco21jans3)
 
 # To add as an exemplar
 - coci06c5p6
